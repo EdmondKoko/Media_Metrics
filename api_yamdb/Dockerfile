@@ -3,6 +3,7 @@ FROM python:3.7-slim
 # Создать директорию вашего приложения.
 WORKDIR /app
 
+ENV PIP_ROOT_USER_ACTION=ignore
 # Скопировать с локального компьютера файл зависимостей
 # в директорию /app.
 COPY /requirements.txt .
