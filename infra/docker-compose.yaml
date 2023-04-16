@@ -15,7 +15,9 @@ services:
     env_file:
       - ./.env
   web:
-    image: infra-web
+    build:
+        context: ../api_yamdb
+        dockerfile: Dockerfile
     restart: always
     volumes:
       # Контейнер web будет работать с данными, хранящиеся в томе static_value, 
