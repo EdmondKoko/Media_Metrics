@@ -43,9 +43,6 @@
 
 - Склонируйте репозиторий:  
   ``` git clone <название репозитория> ```
-- Установите и активируйте виртуальное окружение:  
-  ``` python3 -m venv venv ``` или  ``` python -m venv venv ``` для Windows
-  ``` source venv/bin/activate ```
 - Установите зависимости из файла requirements.txt:   
   ``` pip install -r requirements.txt ```
 - Перейдите в папку api_yamdb/api_yamdb.
@@ -78,8 +75,12 @@
   - DB_HOST=<...> # название сервиса (контейнера)
   - DB_PORT=<...> # порт для подключения к БД
   - SECRET_KEY=<...> # ключ из settings.py
-- Описание команды для заполнения базы данными
-  ```cd api_yamdb && python manage.py loaddata ../infra/fixtures.json```
+- Сделать резервную копию базы данных
+  ```docker-compose exec web python manage.py dumpdata > fixtures.json```
+- Скопировать файл базы данных в контейнер
+  ```docker cp fixtures.json <id>:app/```
+- Заполнение базы данных
+  ```docker-compose exec web python manage.py loaddata fixtures.json```
 
 #### Примеры некоторых запросов API
 
