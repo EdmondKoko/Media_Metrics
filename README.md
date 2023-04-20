@@ -42,16 +42,14 @@
 #### Запуск проекта в dev-режиме
 
 - Склонируйте репозиторий:  
-  ``` git clone <название репозитория> ```
+  ```git clone git@github.com:EdmondKoko/infra_sp2.git```
 - Установите зависимости из файла requirements.txt:   
-  ``` pip install -r requirements.txt ```
+  ```pip install -r requirements.txt```
 - Перейдите в папку api_yamdb/api_yamdb.
 - Примените миграции:   
-  ``` python manage.py migrate ```
-- Загрузите тестовые данные:  
-  ``` python manage.py load_csv_data ```
+  ```python manage.py migrate```
 - Выполните команду:   
-  ``` python manage.py runserver ```
+  ```python manage.py runserver```
 
 #### Запуск приложения в контейнерах
 
@@ -65,9 +63,9 @@
   ```docker-compose exec web python manage.py collectstatic --no-input```
 - Остановить приложение в контейнерах:
   ```docker-compose down -v```
-- Запуск pytest: при запущенном виртуальном окружении
-  ```cd infra_sp2 && pytest```
-- Шаблон наполнения env-файла
+- Запуск pytest:
+  ```docker-compose run web pytest```
+- Шаблон наполнения env-файла:
   - DB_ENGINE=<...> # указываем, что работаем с postgresql
   - DB_NAME=<...> # имя базы данных
   - POSTGRES_USER=<...> # логин для подключения к базе данных
@@ -75,8 +73,6 @@
   - DB_HOST=<...> # название сервиса (контейнера)
   - DB_PORT=<...> # порт для подключения к БД
   - SECRET_KEY=<...> # ключ из settings.py
-- Сделать резервную копию базы данных
-  ```docker-compose exec web python manage.py dumpdata > fixtures.json```
 - Скопировать файл базы данных в контейнер
   ```docker cp fixtures.json <id>:app/```
 - Заполнение базы данных
