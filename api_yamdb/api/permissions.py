@@ -3,7 +3,6 @@ from rest_framework import permissions
 
 class IsAdminOrReadOnly(permissions.BasePermission):
     """Изменение контента доступно только Админу"""
-
     def has_permission(self, request, view):
         return request.method in permissions.SAFE_METHODS or (
             request.user.is_authenticated
@@ -13,7 +12,6 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 
 class AnonimReadOnly(permissions.BasePermission):
     """Анонимный пользователь может отправлять только безопасные запросы."""
-
     def has_permission(self, request, view):
         return request.method in permissions.SAFE_METHODS
 
@@ -33,7 +31,7 @@ class IsSuperUserOrIsAdminOnly(permissions.BasePermission):
 
 
 class AuthorAdminModeratorOrReadOnly(permissions.BasePermission):
-
+"""Проверяет, имеет ли пользователь право на выполнение запроса."""
     def has_permission(self, request, view):
         return (request.method in permissions.SAFE_METHODS
                 or request.user.is_authenticated)
